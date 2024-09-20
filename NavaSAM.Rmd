@@ -1,0 +1,136 @@
+---
+title: "RWorksheet"
+author: "Samantha Nicole Nava"
+date: "2024-09-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1.Set up a vector named age.
+```{r}
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29,35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42,53, 41,51, 35, 24, 33, 41)
+```
+a.How many data points.
+```{r}
+num_datapts <- length(age)
+num_datapts
+```
+2. Find the Reciprocal of the values of age.
+```{r}
+recip_age <- 1 / age
+recip_age
+```
+3. Assign also new_age <- c(age, 0, age).
+```{r}
+new_age <- c(age, 0, age)
+new_age
+```
+4. Sort the values for age.
+```{r}
+sort(age)
+```
+5. Find the minimum and maximum value for age.
+```{r}
+min(age)
+max(age)
+```
+6. Set up a vector named data.
+```{r}
+data <- c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5, 2.3, 2.5, 2.3, 2.4, 2.7)
+num_datapts <- length(data)
+num_datapts 
+```
+7.Generate a new vector for data where you double every value ofthe data.
+```{r}
+new_Data <- 2 * data
+new_Data
+```
+8. Generate a sequence for the following scenario.
+
+8.1 Integers from 1 to 100.
+```{r}
+Int <- seq(1:100)
+Int
+```
+8.2 Numbers from 20 to 60.
+```{r}
+Num <- seq(from=20,to=60)
+Num
+```
+8.3 Mean of numbers from 20 to 60
+```{r}
+Num <- seq(from=20, to=60)
+Num1 <- mean(Num)
+Num1
+```
+8.4 Sum of numbers from 51 to 91.
+```{r}
+Num <- sum(51:91)
+Num
+```
+8.5 Integers from 1 to 1000.
+```{r}
+Int <- seq(1:1000)
+Int
+```
+a. How many data points from 8.1 to 8.4?
+```{r}
+datapts <- length(8.1:8.4)
+datapts
+```
+c. For 8.5, find only the maximum datapoints until 10.
+```{r}
+max_dtpts <- Int[1:10]
+max_dtpts
+length(max_dtpts)
+```
+9. Print a vector with the integers between 1 and 100 that are not and 7 using filter option.
+```{r}
+Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
+```
+10. Generate a sequence backwards of the integers from 1 to 100.
+```{r}
+rev(seq(1:100))
+```
+11. List all the natural numbers below 25 that are multiples of 3or 5.
+```{r}
+x <- Filter(function(i) {any(i %% c(3,5) ==0)}, seq(24))
+SumofX <- sum(x)
+SumofX
+```
+a. How many data points from 10 to 11?
+```{r}
+dtapt <- length(10:11)
+dtapt
+```
+12.
+```{r}
+#x <- {0 + x + 5 + }
+#this code can't run because of a syntax error as it seems to be incomplete
+```
+13.
+```{r}
+score <- c(72, 86, 92, 63, 88, 89, 91, 92, 75, 75,77.)
+s2 <- score[2]
+s2
+s3 <- score[3]
+s3
+```
+14. *Create a vector a = c(1,2,NA,4,NA,6,7).
+```{r}
+a <- c(1, 2 ,NA, 4, NA, 6, 7)
+print(a,na.print="-999")
+print(a,na.print="-999")
+```
+15
+```{r}
+name = readline(prompt="Input your name: ")
+age = readline(prompt="Input your age: ")
+print(paste("My name is",name, "and I am",age ,"years old."))
+(R.version.string)
+```
+
+
