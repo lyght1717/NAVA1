@@ -1,0 +1,85 @@
+---
+title: "RWorksheet_Nava#3a"
+author: "Samantha Nicole Nava"
+date: "2024-09-30"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+USING VECTORS
+```{r}
+LETTERS <- c ("A", "B", "C", "D" ,"E" ,"F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
+ 
+letters <- c ("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s","t", "u", "v", "w", "x", "y", "z")
+
+```
+1.
+a.
+```{r}
+first_eleven <- head(LETTERS, 11)
+first_eleven
+```
+b.
+```{r}
+odd_numberedL <- LETTERS[seq(1,26, by=2)]
+odd_numberedL
+```
+c.
+```{r}
+vowels <- LETTERS[LETTERS %in% c("A","E","I","O","U")]
+vowels
+```
+d.
+```{r}
+lowercase <- tail(letters, 5)
+lowercase
+```
+e.
+```{r}
+lcase_1524 <- letters[15:24]
+lcase_1524
+```
+2.
+a.
+```{r}
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+city
+```
+b.
+```{r}
+temp <- c("42","39","34","34","30", "27")
+temp
+```
+c.
+```{r}
+city_temp <- data.frame(city, temp)
+city_temp
+```
+d.
+```{r}
+names(city_temp) <-c("City", "Temperature")
+city_temp
+```
+e.
+```{r}
+str(city_temp)
+```
+f.
+```{r}
+city_temp[3:4,]
+```
+g.
+```{r}
+highest_temp <- max(city_temp$Temperature)
+highest_temp
+
+lowest_temp <- min(city_temp$Temperature)
+lowest_temp
+
+```
+
+
+
+
