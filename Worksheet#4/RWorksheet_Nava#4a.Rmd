@@ -10,7 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 1. The table below shows the data about shoe size and height.
 ```{r}
-Household_Data <- read_excel("household_data1.xlsx")
+library(openxlsx)
+Household_Data <- read.xlsx("household_data2.xlsx")
 Household_Data
 ```
 a. The data shows the gender, height and shoe size.
@@ -77,11 +78,12 @@ new_order_data
 ```
 5.
 ```{r}
+library(openxlsx)
 data <- read.table("student.csv", header = TRUE, sep = ",", stringsAsFactors = TRUE)
 
 ```
 ```{r}
-View(data)
+print(head(data))
 ```
 6.
 Create an R Program that allows the User to randomly select numbers from 1 to 50.
@@ -106,10 +108,102 @@ a.
 ```{r}
 minBills <- function(price){
   
-  bills <-(1000,500,200,100,50)
+  bills <- c(1000, 500, 200 , 100 ,50)
   
   billCount <- 0
   
+  billCount <- billCount + price %/% bills[1]  
+  price <- price %% bills[1]                    
+  
+  billCount <- billCount + price %/% bills[2]  
+  price <- price %% bills[2]                     
+  
+  billCount <- billCount + price %/% bills[3]  
+  price <- price %% bills[3]                     
+  
+  billCount <- billCount + price %/% bills[4]  
+  price <- price %% bills[4]                     
+  
+  billCount <- billCount + price %/% bills[5] 
+  price <- price %% bills[5]                     
+
+  
+  cat("Minimum number of bills needed:", billCount, "\n")
+}
+
+minBills(8000)  
+
+```
+8.
+a.
+```{r}
+studentsScores <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+(studentsScores)
+
+```
+b.
+```{r}
+
+total_scores <- studentsScores$Grade1 + studentsScores$Grade2 + studentsScores$Grade3 + studentsScores$Grade4
+
+
+average_scores <- total_scores / 4
+
+for (i in 1:nrow(studentsScores)) {
+  if (average_scores[i] > 90) {
+    cat(studentsScores$Name[i], "'s average grade this semester is", round(average_scores[i], 2), "(above 90).\n")
+  } else if (average_scores[i] == 90) {
+    cat(studentsScores$Name[i], "'s average grade this semester is", round(average_scores[i], 2), "(exactly 90).\n")
+  }
+}
+
+```
+c.
+```{r}
+num_students <- nrow(studentsScores)
+
+
+total_scores <- c(0, 0, 0, 0)
+
+
+for (i in 1:num_students) {
+  total_scores[1] <- total_scores[1] + studentsScores$Grade1[i]  
+  total_scores[2] <- total_scores[2] + studentsScores$Grade2[i]  
+  total_scores[3] <- total_scores[3] + studentsScores$Grade3[i] 
+  total_scores[4] <- total_scores[4] + studentsScores$Grade4[i] 
+}
+
+for (j in 1:length(total_scores)) {
+  average_score <- total_scores[j] / num_students
+  if (average_score < 80) {
+    cat("Test", j, "was difficult.\n")
+  }
+}
+```
+d.
+```{r}
+highest_scores <- apply(studentsScores[2:5], 1, function(x) {
+  highest_score <- x[1]  
+  for (score in x) {
+    if (score > highest_score) {
+      highest_score <- score
+    }
+  }
+  return(highest_score)
+})
+
+
+for (i in 1:nrow(studentsScores)) {
+  if (highest_scores[i] > 90) {
+    cat(studentsScores$Name[i], "'s highest grade this semester is", highest_scores[i], ".\n")
+  }
 }
 ```
 
