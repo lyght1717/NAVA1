@@ -7,24 +7,267 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+```
+Using Loop Function
+1.
+```{r}
+vectorA <- c(1, 2, 3, 4, 5)
+
+
+matrixResult <- matrix(0, nrow = 5, ncol = 5)
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    
+    matrixResult[i, j] <- abs(vectorA[i] - vectorA[j])
+  }
+}
+
+
+print(matrixResult)
+```
+2.
+```{r}
+numRows <- 5
+
+for (i in 1:numRows) {
+  for (j in 1:i) {
+    cat('"*"', " ") 
+  }
+  cat("\n")  
+}
+```
+3.
+```{r}
+
+startNum <- 0  
+
+
+if (is.na(startNum) || startNum < 0) {
+  stop("Please enter a valid non-negative number.")
+}
+
+
+fib1 <- 0
+fib2 <- 1
+
+
+cat("Fibonacci sequence starting from", startNum, "up to 500:\n")
+repeat {
+  if (fib1 >= startNum) {
+    cat(fib1, "\n") 
+  } 
+  nextFib <- fib1 + fib2
+  fib1 <- fib2
+  fib2 <- nextFib
+  
+
+  if (fib1 > 500) {
+    break
+  }
+}
+
+```
+Using Basic Graphics (plot(),barplot(),pie(),hist())
+4.
+a.
+```{r}
+library(openxlsx)
+
+
+dataset <- read.xlsx("household_data2.xlsx", sheet = 1)  
+
+
+print(head(dataset))
+print(str(dataset)) 
+
+dataset$Gender <- as.character(dataset$Gender)  # Convert to character if needed
+
+```
+b.
+```{r}
+
+library(openxlsx)
+
+dataset <- read.xlsx("household_data2.xlsx", sheet = 1)
+
+print(head(dataset))
+
+
+uniqueValues <- unique(dataset$Gender)
+print(uniqueValues)
+
+male_subset <- subset(dataset, Gender == "M")
+female_subset <- subset(dataset, Gender == "F")
+
+numMales <- nrow(male_subset)
+numFemales <- nrow(female_subset)
+
+cat("Number of observations in Male:", numMales, "\n")
+cat("Number of observations in Female:", numFemales, "\n")
+
+```
+5.
+```{r}
+categories <- c("Food", "Electricity", "Savings", "Miscellaneous")
+expenses <- c(60, 10, 5, 25)
+
+
+percentages <- round((expenses / sum(expenses)) * 100)
+
+
+labels <- paste(categories, percentages, "%", sep = " ")
+
+
+colors <- c("lightblue", "lightgreen", "pink", "purple")
+
+# Create the pie chart
+pie(expenses, labels = labels, col = colors, main = "Monthly Income Expenses of Dela Cruz Family")
+```
+6.
+a.
+```{r}
+data(iris)
+
+str(iris)
+```
+b.
+```{r}
+means <- colMeans(iris[, 1:4])
+means
+```
+c.
+```{r}
+
+species_count <- table(iris$Species)
+
+
+labels <- paste(names(species_count), species_count)
+
+
+colors <- c("yellow", "pink", "lightblue")
+
+
+pie(species_count, labels = labels, col = colors, main = "Species Distribution in Iris Dataset")
+```
+d.
+```{r}
+
+setosa <- subset(iris, Species == "setosa")
+versicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+
+
+lastSixSetosa <- tail(setosa, 6)
+lastSixVersicolor <- tail(versicolor, 6)
+lastSixVirginica <- tail(virginica, 6)
+
+
+lastSixSetosa
+lastSixVersicolor
+lastSixVirginica
+```
+e.
+```{r}
+
+iris$Species <- as.factor(iris$Species)
+
+
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     col = iris$Species, pch = 19,
+     xlab = "Sepal Length", 
+     ylab = "Sepal Width",
+     main = "Iris Dataset",
+     sub = "Sepal Width and Length")
+
+legend("topright", legend = levels(iris$Species), col = 1:3, pch = 19)
+```
+f.
+The scatter plot is a display of the variation within the iris species for changes in sepal length and width. You can see there is clustering - where some species are very close to another, hence similar in measurement.
+For example, setosa may typically be distinguished from the rest, say versicolor and virginica, with smallersepal length and width. This might also suggest that setosa may be somewhat different from the other two species, whose measures overlap.:
+The means computed in b give a summary measure for each measurement, providing the mean central tendency of each characteristic for all of the species. In this case, the higher mean values in the versicolor and virginica species for the characteristics Petal.Length and Petal.Width indicate that these species have larger petals compared to setosa.
+
+7.
+
+```{r}
+library(openxlsx)
+
+
+alexa_data <- read.xlsx("alexa_file.xlsx")
+
+
+print("Original Dataset:")
+print(head(alexa_data))  # Show the first 6 rows
+
+
+alexa_data$Variants <- gsub("^\\s+|\\s+$", "", alexa_data$Variants)  # Trim leading and trailing spaces
+alexa_data$Variants <- gsub("\\s+", " ", alexa_data$Variants)  # Replace multiple spaces with a single space
+
+
+alexa_data$Variants <- gsub("Black Dot", "BlackDot", alexa_data$Variants)
+alexa_data$Variants <- gsub("Black Plus", "BlackPlus", alexa_data$Variants)
+alexa_data$Variants <- gsub("Black Show", "BlackShow", alexa_data$Variants)
+alexa_data$Variants <- gsub("Black Spot", "BlackSpot", alexa_data$Variants)
+alexa_data$Variants <- gsub("White Dot", "WhiteDot", alexa_data$Variants)
+alexa_data$Variants <- gsub("White Plus", "WhitePlus", alexa_data$Variants)
+alexa_data$Variants <- gsub("White Show", "WhiteShow", alexa_data$Variants)
+alexa_data$Variants <- gsub("White Spot", "WhiteSpot", alexa_data$Variants)
+
+print("Cleaned Dataset Snippet:")
+print(head(alexa_data)) 
+
+
+write.xlsx(alexa_data, "cleaned_alexa_file.xlsx")
+
+
+
+```
+b.
+```{r}
+variationCounts <- alexa_data %>%
+  count(Variants)
+
+
+save(variationCounts, file = "variations.RData")
+
+
+print("Variation Counts:")
+print(variationCounts)
+```
+c.
+```{r}
+barplot(variationCounts$n, 
+        names.arg = variationCounts$Variants, 
+        col = rainbow(nrow(variationCounts)), 
+        main = "Frequency of Alexa Variants", 
+        xlab = "Variants", 
+        ylab = "Count", 
+        las = 2)  
+```
+d.
+```{r}
+
+# Step 5: Separate counts for black and white variations
+blackVariations <- variationCounts[grep("Black", variationCounts$Variants), ]
+whiteVariations <- variationCounts[grep("White", variationCounts$Variants), ]
+
+# Barplot for Black Variants
+barplot(blackVariations$n, 
+        names.arg = blackVariations$Variants, 
+        col = "black", 
+        main = "Count of Black Variants",
+        xlab = "Variants", 
+        ylab = "Count")
+
+# Barplot for White Variants
+barplot(whiteVariations$n, 
+        names.arg = whiteVariations$Variants, 
+        col = "lightgrey", 
+        main = "Count of White Variants",
+        xlab = "Variants", 
+        ylab = "Count")
+
+
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
