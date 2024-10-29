@@ -7,6 +7,8 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+
 
 ```
 Using Loop Function
@@ -225,6 +227,8 @@ write.xlsx(alexa_data, "cleaned_alexa_file.xlsx")
 ```
 b.
 ```{r}
+library(dplyr)
+
 variationCounts <- alexa_data %>%
   count(Variants)
 
